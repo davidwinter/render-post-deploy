@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: render-post-deploy
+    env: python
+    buildCommand: "./bin/build.sh"
+    startCommand: "gunicorn --bind 0.0.0.0:3000 wsgi:app"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.7
