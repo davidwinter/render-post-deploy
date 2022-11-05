@@ -2,4 +2,5 @@
 
 set -o errexit
 
+poetry --version
 poetry install
