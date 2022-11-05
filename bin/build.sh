@@ -2,4 +2,4 @@
 
 set -o errexit
 
-pip install
+poetry install
