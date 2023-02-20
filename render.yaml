@@ -3,7 +3,7 @@ services:
     name: render-post-deploy
     env: python
     buildCommand: poetry install
-    startCommand: gunicorn app:app --chdir ./render_post_deploy
+    startCommand: hypercorn render_post_deploy.app:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.10.7
