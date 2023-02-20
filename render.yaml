@@ -3,10 +3,7 @@ services:
     name: render-post-deploy
     env: python
     buildCommand: |
-      export POETRY_HOME="$(pwd)/.poetry" \
-      && curl -sSL https://install.python-poetry.org | python3 - \
-      && export PATH="$POETRY_HOME/bin:$PATH" \
-      && poetry --version
+      poetry lock --no-update && poetry install
     startCommand: hypercorn render_post_deploy.app:app
     envVars:
       - key: PYTHON_VERSION
