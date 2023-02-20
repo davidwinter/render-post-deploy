@@ -1,0 +1,17 @@
+name: deploy
+
+on:
+  push
+
+jobs:
+  check_deploy_integration:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: npx wait-on --timeout 600000 "${CHECK_HOSTNAME}/version-check?commit=${GITHUB_SHA}"
+        env:
+          CHECK_HOSTNAME: https://render-post-deploy.onrender.com
+      - run: echo App deployed!!
