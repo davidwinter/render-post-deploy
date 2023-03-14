@@ -11,7 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
-      - run: npx wait-on --timeout 600000 "${CHECK_HOSTNAME}/health?commit=${GITHUB_SHA}"
+      - name: wait for deploy to complete
+        run: npx wait-on --timeout 600000 "${CHECK_HOSTNAME}/version-check/${GITHUB_SHA}"
         env:
           CHECK_HOSTNAME: https://render-post-deploy.onrender.com
       - run: echo App deployed!!

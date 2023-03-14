@@ -1,5 +1,5 @@
 require 'sinatra'
 
-get '/health' do
+get '/version-check/:commit' do
     params[:commit] == ENV['RENDER_GIT_COMMIT'] ? 204 : 404
 end
