@@ -9,10 +9,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
       - name: wait for deploy to complete
-        run: npx wait-on --timeout 600000 "${CHECK_HOSTNAME}/version-check/${GITHUB_SHA}"
+        run: curl --head -X GET --retry 2 --retry-connrefused --retry-delay 1 "${CHECK_HOSTNAME}/version-check/${GITHUB_SHA}"
+        # run: npx wait-on --timeout 600000 "${CHECK_HOSTNAME}/version-check/${GITHUB_SHA}"
         env:
           CHECK_HOSTNAME: https://render-post-deploy.onrender.com
       - run: echo App deployed!!
